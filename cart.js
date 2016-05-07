@@ -95,7 +95,7 @@ function CartDAO(database) {
          */
 
         this.db.collection('cart').aggregate([
-                                                 { $match: { userId: userid }},
+                                                 { $match: { userId: userId }},
                                                  { $unwind: '$items' },
                                                  { $match: { 'items._id': itemId } }
                                              ], function(err, doc) {
