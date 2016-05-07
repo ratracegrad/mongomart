@@ -1,0 +1,26 @@
+{
+  "name": "mongomart",
+  "version": "0.1.0",
+  "description": "Ecommerce app Using the MongoDB driver and Express",
+  "main": "mongomart.js",
+  "author": "Jennifer Bland",
+  "scripts": {
+    "start": "node mongomart.js"
+  },
+  "dependencies": {
+    "body-parser": "~1.15.0",
+    "express": "~4.13.3",
+    "lodash": "^4.11.2",
+    "mongodb": "~2.1.3",
+    "nunjucks": "~2.2.0",
+    "nunjucks-date": "~1.2.0"
+  },
+  "license": "0BSD",
+  "private": "true",
+  "keywords": [
+    "mongo",
+    "mongodb",
+    "jennifer",
+    "bland"
+  ]
+}
