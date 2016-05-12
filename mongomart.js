@@ -247,6 +247,10 @@ MongoClient.connect(dbURI, function(err, db) {
         });
     });
 
+    router.get('/locations', function(req, res) {
+        res.render('locations');
+    });
+
 
     router.post("/user/:userId/cart/items/:itemId/quantity", function(req, res) {
         "use strict";
