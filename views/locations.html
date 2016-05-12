@@ -30,8 +30,7 @@
 
 <body>
 
-% # Include navigation
-%include('includes/nav.tpl')
+{% include "includes/nav.html" %}
 
 <!-- Page Content -->
 <div class="container">
@@ -50,11 +49,11 @@
         <div class="col-md-12">
             <h2>Store Locator</h2>
             <p>Find the store closest to you.</p>
-            % if zip_error:
+            {% if zip_error %}
             <div class="alert alert-danger">
                 {{zip_error}}
             </div>
-            % end
+            {% endif %}
             <form class="form">
                 <div class="form-group{{' has-error' if zip_error else ''}}">
                     <label class="control-label" for="zip">Zip code</label>
@@ -65,11 +64,11 @@
                     <button type="submit" class="btn btn-primary">Find stores by zip</button>
                 </div>
             </form>
-            % if city_and_state_error:
+            {% if city_and_state_error %}
             <div class="alert alert-danger">
                  {{city_and_state_error}}
             </div>
-            % end
+            {% endif %}
             <form class="form">
                 <div class="form-group<#if cityAndStateError??> has-error</#if>">
                     <label class="control-label" for="city">City</label>
@@ -79,13 +78,13 @@
                     <label for="state">State</label>
                     <select class="form-control" name="state" id="state">
                       <option>Choose one</option>
-                      % for st in states:
-                      % if st == state:
-                        <option value="{{st}}" selected>{{st}}</option>
-                      % else:
-                      <option value="{{st}}">{{st}}</option>
-                      % end
-                      % end
+                      {% for st in states %}
+                          {% if st == state %}
+                            <option value="{{st}}" selected>{{st}}</option>
+                          {% else %}
+                          <option value="{{st}}">{{st}}</option>
+                          {% endif %}
+                      {% endfor %}
                     </select>
                 </div>
                 <div class="form-group">
@@ -96,7 +95,7 @@
 
 
             <!-- row -->
-            % for store in stores:
+            {% for store in stores %}
 
             <div class="row">
                 <div class="col-md-12">
@@ -104,39 +103,39 @@
                     <address>
                         <strong>{{store['name']}}</strong><br/>
                         {{store['address']}}<br/>
-                        % if store['address2']:
-                        {{store['address2']}}<br/>
-                        % end
+                        {% if store['address2'] %}
+                            {{store['address2']}}<br/>
+                        {% endif %}
                         {{store['city']}}, {{store['state']}} {{store['zip']}}<br/>
                         {{store['country']}}<br/>
                     </address>
                     <!-- only show distance for zip searches -->
-                    % if find == "byZip":
-                    <strong>Distance: {{store['distance_from_point']}} km</strong>
-                    % end
+                    {% if find == "byZip" %}
+                        <strong>Distance: {{store['distance_from_point']}} km</strong>
+                    {% endif %}
                 </div>
             </div>
             <!-- /.row -->
 
             <hr/>
 
-            % end
+            {% endfor %}
             <!-- /.row -->
 
-            % if len(stores) > 0:
+            {% if stores.length > 0 %}
             <!-- Pagination -->
             <div class="row text-center">
                 <div class="col-lg-12">
                     <ul class="pagination">
-                    % for i in xrange(num_pages):
+                    {% for i in xrange(num_pages) %}
                         <li {{'class="active"' if page == i else ''}}>
                             <a href="?page={{i}}&amp;city={{city}}&amp;state={{state}}&amp;zip={{zip}}&amp;find={{find}}">{{i+1}}</a>
                         </li>
-                    % end
+                    {% endfor %}
                     </ul>
                 </div>
             </div>
-            % end
+            {% endif %}
 
             <div style="text-align:center;">
                 <i>{{num_stores}} Stores</i>
@@ -152,8 +151,7 @@
 </div>
 <!-- /.container -->
 
-% # Include footer
-%include('includes/footer.tpl')
+{% include "includes/footer.html" %}
 
 </body>
 
