@@ -5,7 +5,7 @@
   "main": "mongomart.js",
   "author": "Jennifer Bland",
   "scripts": {
-    "start": "node mongomart.js"
+    "start": "node server.js"
   },
   "dependencies": {
     "body-parser": "~1.15.0",
